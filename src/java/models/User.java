@@ -1,5 +1,6 @@
 package models;
 
+import com.mongodb.DBObject;
 import java.util.Date;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
@@ -34,6 +35,10 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.createdAt = createdAt;
+    }
+
+    public User(DBObject next) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getId() {

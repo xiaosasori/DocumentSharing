@@ -1,11 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import db.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,27 +17,35 @@ import models.User;
 
 /**
  *
- * @author Admin
+ * @author Hoang Hiep
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
+public class UserInfo extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = UserDAO.login(email, password);
+        String username;
+        User user = null;
+        if (request.getParameter("username") != null) {
+            username = request.getParameter("username");
+            user = UserDAO.UserInfo(username);
+        }
         if (user == null) {
-            String msg = "wrong email or password";
+            String msg = "User is not exist!";
             request.setAttribute("err", msg);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("user.jsp").forward(request, response);
         } else {
-            HttpSession session = request.getSession(true);
-
-            session.setAttribute("sessionuser", user.getUserName());
-            session.setAttribute("sessionmemberid", user.getId());
-
-            response.sendRedirect("home.jsp");
+            request.setAttribute("user", user);
+            request.setAttribute("err", "User information:");
+            request.getRequestDispatcher("user.jsp").forward(request, response);
         }
     }
 
