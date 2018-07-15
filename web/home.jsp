@@ -21,10 +21,9 @@
         </div>
         <c:if test = "${sessionuser != null}">
         <div class="bigRight">
-             People you may know:
-             <br>
-               <jsp:include page="AllUserController"/>
-                   
+            <br>
+            <jsp:include page="AllRequestFriendSent"/>
+            
         </div>
         </c:if>
     </body>

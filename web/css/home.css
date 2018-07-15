@@ -20,3 +20,8 @@ and open the template in the editor.
     position: relative;
     border: 1px solid black;
 }
+
+div{
+    border: 1px solid black;
+    position: relative;
+}

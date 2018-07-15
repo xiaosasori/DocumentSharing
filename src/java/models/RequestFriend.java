@@ -18,23 +18,25 @@ import org.mongodb.morphia.annotations.Property;
 public class RequestFriend {
     @Id
     private String requestFriendID;
-    @Property("fromUsername")
-    private String fromUsername;
-    private String toUsername;
+    private String fromUserID;
+    private String toUserID;
+
+    public RequestFriend() {
+    }
     
     public RequestFriend(DBObject next) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public RequestFriend(String fromUserID, String toUserID) {
         this.requestFriendID = requestFriendID;
-        this.fromUsername = fromUserID;
-        this.toUsername = toUserID;
+        this.fromUserID = fromUserID;
+        this.toUserID = toUserID;
     }
     
     public RequestFriend(String requestFriendID, String fromUserID, String toUserID) {
         this.requestFriendID = requestFriendID;
-        this.fromUsername = fromUserID;
-        this.toUsername = toUserID;
+        this.fromUserID = fromUserID;
+        this.toUserID = toUserID;
     }
 
     public String getRequestFriendID() {
@@ -46,19 +48,19 @@ public class RequestFriend {
     }
 
     public String getFromUserID() {
-        return fromUsername;
+        return fromUserID;
     }
 
     public void setFromUserID(String fromUserID) {
-        this.fromUsername = fromUserID;
+        this.fromUserID = fromUserID;
     }
 
     public String getToUserID() {
-        return toUsername;
+        return toUserID;
     }
 
     public void setToUserID(String toUserID) {
-        this.toUsername = toUserID;
+        this.toUserID = toUserID;
     }
     
 }

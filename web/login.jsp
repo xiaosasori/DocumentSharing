@@ -49,7 +49,7 @@
             <div class="login-top right">
                 <h3>Login</h3>
                 <form action="LoginController" method="post">
-                    <input type="text" class="email1 " name="email" placeholder="Email" required="">
+                    <input type="text" class="email1 " name="name" placeholder="username" required="">
                     <input type="password" class="password1" name="password"  placeholder="Password" required="">	
                     <input type="checkbox" id="brand" value="">
                     <label for="brand"><span></span> Remember me</label>

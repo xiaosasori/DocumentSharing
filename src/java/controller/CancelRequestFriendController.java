@@ -5,21 +5,21 @@
  */
 package controller;
 
-import db.UserDAO;
+import db.RequestFriendDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.User;
+import javax.servlet.http.HttpSession;
+import models.RequestFriend;
 
 /**
  *
  * @author Hoang Hiep
  */
-public class AllUserController extends HttpServlet {
+public class CancelRequestFriendController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,17 +32,12 @@ public class AllUserController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            
-            /* TODO output your page here. You may use following sample code. */
-            ArrayList<User> users = UserDAO.showAllUser();
-            for (User user : users) {
-                out.print("<p>"+user.getUserName()+" &emsp; <a href=''>Add Friend</a> <a href=''>Is Colleague</a></p>");
-            }
-            
-        }
+        HttpSession session = request.getSession();
+        String fromUserID =  (String) session.getAttribute("sessionmemberid");
+        String toUserID = request.getParameter("toUserID");
+        
+        RequestFriendDAO.cancelRequestFriend(fromUserID, toUserID);
+        response.sendRedirect("home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

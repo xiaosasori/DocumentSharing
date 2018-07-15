@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>AllUserController</servlet-name>
-        <servlet-class>controller.AllUserController</servlet-class>
+        <servlet-class>controller.AllUserYouMayKnowController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutController</servlet-name>
@@ -11,6 +11,18 @@
     <servlet>
         <servlet-name>UserInfor</servlet-name>
         <servlet-class>controller.UserInfo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddFriendController</servlet-name>
+        <servlet-class>controller.AddFriendController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllRequestFriendSent</servlet-name>
+        <servlet-class>controller.ShowFriendController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelRequestFriendController</servlet-name>
+        <servlet-class>controller.CancelRequestFriendController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AllUserController</servlet-name>
@@ -23,6 +35,18 @@
     <servlet-mapping>
         <servlet-name>UserInfor</servlet-name>
         <url-pattern>/UserInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddFriendController</servlet-name>
+        <url-pattern>/AddFriendController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllRequestFriendSent</servlet-name>
+        <url-pattern>/AllRequestFriendSent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelRequestFriendController</servlet-name>
+        <url-pattern>/CancelRequestFriendController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

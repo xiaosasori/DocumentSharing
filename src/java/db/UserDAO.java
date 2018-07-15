@@ -22,9 +22,9 @@ public class UserDAO {
         return String.valueOf(ds.save(user));
     }
 
-    public static User login(String email, String password) {
+    public static User login(String username, String password) {
         Datastore ds = MongoContext.getDatastore();
-        User user = ds.find(User.class).filter("email", email).filter("password", password).get();
+        User user = ds.find(User.class).filter("user_name", username).filter("password", password).get();
 
         return user;
     }
@@ -50,6 +50,6 @@ public class UserDAO {
     public static void main(String[] args) {
         ArrayList<User> arr = showAllUser();
         User user = arr.get(0);
-        System.out.println(user.getEmail());
+        System.out.println(user.getId());
     }
 }
