@@ -6,6 +6,7 @@
 package models;
 import com.mongodb.DBObject;
 import java.util.Date;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
@@ -17,9 +18,9 @@ import org.mongodb.morphia.annotations.Property;
 @Entity("requestFriend")
 public class RequestFriend {
     @Id
-    private String requestFriendID;
-    private String fromUserID;
-    private String toUserID;
+    private ObjectId requestFriendID;
+    private ObjectId fromUserID;
+    private ObjectId toUserID;
 
     public RequestFriend() {
     }
@@ -27,39 +28,33 @@ public class RequestFriend {
     public RequestFriend(DBObject next) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public RequestFriend(String fromUserID, String toUserID) {
-        this.requestFriendID = requestFriendID;
-        this.fromUserID = fromUserID;
-        this.toUserID = toUserID;
-    }
-    
-    public RequestFriend(String requestFriendID, String fromUserID, String toUserID) {
-        this.requestFriendID = requestFriendID;
+
+    public RequestFriend(ObjectId fromUserID, ObjectId toUserID) {
         this.fromUserID = fromUserID;
         this.toUserID = toUserID;
     }
 
-    public String getRequestFriendID() {
+    public ObjectId getRequestFriendID() {
         return requestFriendID;
     }
 
-    public void setRequestFriendID(String requestFriendID) {
+    public void setRequestFriendID(ObjectId requestFriendID) {
         this.requestFriendID = requestFriendID;
     }
 
-    public String getFromUserID() {
+    public ObjectId getFromUserID() {
         return fromUserID;
     }
 
-    public void setFromUserID(String fromUserID) {
+    public void setFromUserID(ObjectId fromUserID) {
         this.fromUserID = fromUserID;
     }
 
-    public String getToUserID() {
+    public ObjectId getToUserID() {
         return toUserID;
     }
 
-    public void setToUserID(String toUserID) {
+    public void setToUserID(ObjectId toUserID) {
         this.toUserID = toUserID;
     }
     

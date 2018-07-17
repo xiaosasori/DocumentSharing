@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.RequestFriend;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -33,8 +34,8 @@ public class CancelRequestFriendController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String fromUserID =  (String) session.getAttribute("sessionmemberid");
-        String toUserID = request.getParameter("toUserID");
+        ObjectId fromUserID =  (ObjectId) session.getAttribute("sessionmemberid");
+        ObjectId toUserID = new ObjectId(request.getParameter("toUserID"));
         
         RequestFriendDAO.cancelRequestFriend(fromUserID, toUserID);
         response.sendRedirect("home.jsp");

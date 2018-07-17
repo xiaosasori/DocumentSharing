@@ -6,6 +6,7 @@
 package models;
 
 import java.util.Date;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
@@ -17,7 +18,7 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity("friend")
 public class Friend {
     @Id
-    private String friendID;
+    private ObjectId id;
     @Reference(idOnly = true,lazy = true)
     private User fromUserID;
     @Reference(idOnly = true,lazy = true)
@@ -36,17 +37,17 @@ public class Friend {
      public Friend(User fromUserID, User toUserID) {
         this.fromUserID = fromUserID;
         this.toUserID = toUserID;
-        this.acceptedAt = acceptedAt;
     }
 
-    
-    public String getFriendID() {
-        return friendID;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setFriendID(String friendID) {
-        this.friendID = friendID;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
+
+   
 
     public User getFromUserID() {
         return fromUserID;

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.RequestFriend;
 import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -38,8 +39,8 @@ public class AddFriendController extends HttpServlet {
 
         
         HttpSession session = request.getSession();
-        String fromUserID =  (String) session.getAttribute("sessionmemberid");
-        String toUserID = request.getParameter("toUserID");
+        ObjectId fromUserID =  (ObjectId) session.getAttribute("sessionmemberid");
+        ObjectId toUserID = new ObjectId(request.getParameter("toUserID"));
         RequestFriend requestFriend = new RequestFriend(fromUserID, toUserID);
         
         RequestFriendDAO.requestFriend(requestFriend);

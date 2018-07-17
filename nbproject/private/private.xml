@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/controller/LogoutController.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/models/RequestFriend.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/web/home.jsp</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/db/RequestFriendDAO.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/db/HibernateUtil.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/db/UserDAO.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/controller/SignupController.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/controller/UserInfo.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/web/user.jsp</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/web/css/home.css</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/web/login.jsp</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/controller/AllUserController.java</file>
-            <file>file:/C:/Users/Hoang%20Hiep/Documents/GitHub/DocumentSharing/src/java/models/User.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -34,16 +35,16 @@ public class ShowFriendController extends HttpServlet {
             out.print("Request sent:<br>");
             ArrayList<User> users = UserDAO.showAllUser();
             for (User user : users) {
-                String fromUserID = (String) session.getAttribute("sessionmemberid");
-                String toUserID = user.getId();
+                ObjectId fromUserID = (ObjectId) session.getAttribute("sessionmemberid");
+                ObjectId toUserID = user.getId();
                 if(RequestFriendDAO.checkRequestSent(fromUserID, toUserID))
                 out.print("<p>"+user.getUserName()+" &emsp; <a href='CancelRequestFriendController?toUserID="+user.getId()+"'>Cancel Request</a>");
             }
             
             out.print("<br><p>User you may know:</p>");
             for (User user : users) {
-                String fromUserID = (String) session.getAttribute("sessionmemberid");
-                String toUserID = user.getId();
+                ObjectId fromUserID = (ObjectId) session.getAttribute("sessionmemberid");
+                ObjectId toUserID = user.getId();
                 if(RequestFriendDAO.checkRequestSent(fromUserID, toUserID)==false&&!fromUserID.equals(toUserID))
                 out.print("<p>"+user.getUserName()+" &emsp; <a href='AddFriendController?toUserID="+user.getId()+"'>Add Friend</a> <a href=''>Is Colleague</a></p>");
             }
