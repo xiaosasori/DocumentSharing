@@ -20,39 +20,55 @@ import org.mongodb.morphia.query.Query;
  * @author Hoang Hiep
  */
 public class FriendDAO {
+
     public static String acceptFriend(Friend friend) {
         Datastore ds = MongoContext.getDatastore();
         friend.setAcceptedAt(new Date());
         return String.valueOf(ds.save(friend));
     }
-    
-    public static void cancelFriend(String fromUserID, String toUserID) {
+
+   
+
+    public static void cancelFriend(ObjectId fromUserID, ObjectId toUserID) {
         Datastore ds = MongoContext.getDatastore();
         final Query<Friend> row = ds.createQuery(Friend.class)
-                                                .filter("fromUserID", fromUserID)
-                                                .filter("toUserID", toUserID);
+                .filter("fromUserID", fromUserID)
+                .filter("toUserID", toUserID);
         ds.delete(row);
     }
-//     ObjectId("5b4b0c7b00364e0854a03155")
-//    ObjectId("5b4b0c8b00364e0854a03157")
-    public static boolean checkIsFriend(ObjectId fromUserID, ObjectId toUserID){
+
+    public static boolean checkIsFriend(ObjectId fromUserID, ObjectId toUserID) {
         Datastore ds = MongoContext.getDatastore();
-        
         Friend friend = ds.find(Friend.class)
                 .filter("fromUserID", fromUserID).filter("toUserID", toUserID).get();
-//        .filter("_id","5b4b02e5d048571a1419ceb5").get();
-        if(friend!=null)return true;
+
+        if (friend != null) {
+            return true;
+        }
         return false;
     }
+    
+     public static int numFriend(String fromUserID) {
+        ArrayList<User> users = UserDAO.showAllUser();
+        int count = 0;
+        for (User user : users) {
+            ObjectId toUserID = user.getId();
+            if (FriendDAO.checkIsFriend(new ObjectId(fromUserID), toUserID) || FriendDAO.checkIsFriend(toUserID,new ObjectId(fromUserID))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         ArrayList<User> arr = showAllUser();
-        
-        acceptFriend(new Friend(arr.get(0),arr.get(1)));
-        System.out.println(checkIsFriend(arr.get(0).getId(),arr.get(1).getId()));
-        
+
+        String s = acceptFriend(new Friend(arr.get(0).getId(), arr.get(1).getId()));
+        //System.out.println(checkIsFriend(arr.get(0).getId(),arr.get(2).getId()));
+
         /*String id = requestFriend(new RequestFriend("123456", "789456"));
         System.out.println(id);*/
-        /*ArrayList<User> arr = showAllUser();
+ /*ArrayList<User> arr = showAllUser();
         User user = arr.get(0);
         //requestFriend(new RequestFriend(arr.get(0).getId(), arr.get(1).getId()));
         cancelRequestFriend(arr.get(0).getId(), arr.get(1).getId());

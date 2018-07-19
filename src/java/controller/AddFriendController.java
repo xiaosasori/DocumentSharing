@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.FriendDAO;
 import db.RequestFriendDAO;
 import db.UserDAO;
 import java.io.IOException;
@@ -39,12 +40,15 @@ public class AddFriendController extends HttpServlet {
 
         
         HttpSession session = request.getSession();
-        ObjectId fromUserID =  (ObjectId) session.getAttribute("sessionmemberid");
+        ObjectId fromUserID =  (ObjectId)(session.getAttribute("sessionmemberid"));
         ObjectId toUserID = new ObjectId(request.getParameter("toUserID"));
         RequestFriend requestFriend = new RequestFriend(fromUserID, toUserID);
         
         RequestFriendDAO.requestFriend(requestFriend);
-        response.sendRedirect("home.jsp");
+        
+        
+        String referer = request.getHeader("Referer");
+                response.sendRedirect(referer);
  
     }
 

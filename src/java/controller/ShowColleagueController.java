@@ -1,36 +1,61 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
+import db.ColleagueDAO;
+import db.FriendDAO;
 import db.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
- * @author Admin
+ * @author Hoang Hiep
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/SignupController"})
-public class SignupController extends HttpServlet {
+public class ShowColleagueController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = UserDAO.checkUser(name);
-        if (user == null) {
-            User userNew = new User(name, password, email);
-            UserDAO.insertUser(userNew);
-            String msg = "User created!";
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }else{
-            String msg = "User exist!";
-            request.setAttribute("err", msg);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            ArrayList<User> users = UserDAO.showAllUser();
+            /* TODO output your page here. You may use following sample code. */
+
+            out.print("<h3>My Colleague:</h3>");
+
+            int count=0;
+            for (User user : users) {
+                ObjectId fromUserID = (ObjectId) (session.getAttribute("sessionmemberid"));
+                ObjectId toUserID = user.getId();
+                if (ColleagueDAO.checkColleague(fromUserID, toUserID)) {
+                    count++;
+                    out.print("<p><a href='UserInfo?userid="+user.getId()+"'>" + user.getUserName() + "</a> &emsp; <a href='CancelColeagueController?toUserID=" + user.getId() + "'>Remove Colleague</a>");
+                }
+            }
+            
+            out.print("<p>Total: "+count+" result.</p>");
+
         }
     }
 

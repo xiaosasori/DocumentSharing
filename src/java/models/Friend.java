@@ -18,53 +18,51 @@ import org.mongodb.morphia.annotations.Reference;
 @Entity("friend")
 public class Friend {
     @Id
-    private ObjectId id;
-    @Reference(idOnly = true,lazy = true)
-    private User fromUserID;
-    @Reference(idOnly = true,lazy = true)
-    private User toUserID;
+    private ObjectId friendID;
+    private ObjectId fromUserID;
+    private ObjectId toUserID;
     private Date acceptedAt;
 
     public Friend() {
     }
 
-    public Friend(User fromUserID, User toUserID, Date acceptedAt) {
+    public Friend(ObjectId fromUserID, ObjectId toUserID, Date acceptedAt) {
         this.fromUserID = fromUserID;
         this.toUserID = toUserID;
         this.acceptedAt = acceptedAt;
     }
-    
-     public Friend(User fromUserID, User toUserID) {
+
+    public Friend(ObjectId fromUserID, ObjectId toUserID) {
         this.fromUserID = fromUserID;
         this.toUserID = toUserID;
     }
 
-    public ObjectId getId() {
-        return id;
+  
+
+    public ObjectId getFriendID() {
+        return friendID;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setFriendID(ObjectId friendID) {
+        this.friendID = friendID;
     }
 
-   
-
-    public User getFromUserID() {
+    public ObjectId getFromUserID() {
         return fromUserID;
     }
 
-    public void setFromUserID(User fromUserID) {
+    public void setFromUserID(ObjectId fromUserID) {
         this.fromUserID = fromUserID;
     }
 
-    public User getToUserID() {
+    public ObjectId getToUserID() {
         return toUserID;
     }
 
-    public void setToUserID(User toUserID) {
+    public void setToUserID(ObjectId toUserID) {
         this.toUserID = toUserID;
     }
-
+    
 
     public Date getAcceptedAt() {
         return acceptedAt;

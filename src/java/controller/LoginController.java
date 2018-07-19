@@ -1,5 +1,7 @@
 package controller;
 
+import db.ColleagueDAO;
+import db.FriendDAO;
 import db.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -30,9 +32,11 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession(true);
-
+            
             session.setAttribute("sessionuser", user.getUserName());
             session.setAttribute("sessionmemberid", user.getId());
+            
+            
 
             response.sendRedirect("home.jsp");
         }

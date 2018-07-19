@@ -1,37 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
-import db.UserDAO;
+import db.AuthorDocumentDAO;
+import db.CoauthorDocumentDAO;
+import db.CommentDocumentDAO;
+import db.DocumentDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
- * @author Admin
+ * @author Hoang Hiep
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/SignupController"})
-public class SignupController extends HttpServlet {
+public class DeleteDocumentController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = UserDAO.checkUser(name);
-        if (user == null) {
-            User userNew = new User(name, password, email);
-            UserDAO.insertUser(userNew);
-            String msg = "User created!";
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }else{
-            String msg = "User exist!";
-            request.setAttribute("err", msg);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        response.setContentType("text/html;charset=UTF-8");
+
+        ObjectId documentID = new ObjectId(request.getParameter("documentID"));
+        
+        DocumentDAO.deleteDocument(documentID);
+        AuthorDocumentDAO.deleteAuthorDocument(documentID);
+        CoauthorDocumentDAO.deleteCoauthorByDocumentID(documentID);
+        CommentDocumentDAO.deleteCommentByDocumentID(documentID);
+        response.sendRedirect("home.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

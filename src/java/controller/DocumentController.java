@@ -1,37 +1,49 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
+import db.DocumentDAO;
 import db.UserDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.Document;
 import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
- * @author Admin
+ * @author Hoang Hiep
  */
-@WebServlet(name = "SignupController", urlPatterns = {"/SignupController"})
-public class SignupController extends HttpServlet {
+public class DocumentController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = UserDAO.checkUser(name);
-        if (user == null) {
-            User userNew = new User(name, password, email);
-            UserDAO.insertUser(userNew);
-            String msg = "User created!";
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }else{
-            String msg = "User exist!";
-            request.setAttribute("err", msg);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        
+        Document document = DocumentDAO.getDocumentById(request.getParameter("documentid"));
+        request.setAttribute("document", document);
+        
+        User user = UserDAO.getUserAuthorByDocumentId(request.getParameter("documentid"));
+        request.setAttribute("user", user);
+        
+  
+        request.getRequestDispatcher("document.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

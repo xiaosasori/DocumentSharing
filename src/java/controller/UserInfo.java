@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.User;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -32,11 +33,11 @@ public class UserInfo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username;
+        ObjectId userid;
         User user = null;
-        if (request.getParameter("username") != null) {
-            username = request.getParameter("username");
-            user = UserDAO.UserInfo(username);
+        if (request.getParameter("userid") != null) {
+            userid = new ObjectId(request.getParameter("userid"));
+            user = UserDAO.UserInfo(userid);
         }
         if (user == null) {
             String msg = "User is not exist!";

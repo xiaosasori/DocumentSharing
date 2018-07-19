@@ -34,11 +34,11 @@ public class CancelRequestFriendController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        ObjectId fromUserID =  (ObjectId) session.getAttribute("sessionmemberid");
+        ObjectId fromUserID =  (ObjectId)(session.getAttribute("sessionmemberid"));
         ObjectId toUserID = new ObjectId(request.getParameter("toUserID"));
         
         RequestFriendDAO.cancelRequestFriend(fromUserID, toUserID);
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("requestfriendsent.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

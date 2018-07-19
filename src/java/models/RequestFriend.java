@@ -57,5 +57,6 @@ public class RequestFriend {
     public void setToUserID(ObjectId toUserID) {
         this.toUserID = toUserID;
     }
+   
     
 }
